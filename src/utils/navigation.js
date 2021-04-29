@@ -1,6 +1,7 @@
 import React from 'react';
-import { Navigation } from 'react-native-navigation';
-import { Provider } from 'react-redux';
+import {Navigation} from 'react-native-navigation';
+import {Provider} from 'react-redux';
+import {NavigationProvider} from 'react-native-navigation-hooks';
 import configureStore from '../store/configureStore';
 
 const store = configureStore();
@@ -11,7 +12,9 @@ export const registerScreen = (screenName, Component) => {
     () => (props) => {
       return (
         <Provider store={store}>
-          <Component {...props} />
+          <NavigationProvider value={{componentId: props.componentId}}>
+            <Component {...props} />
+          </NavigationProvider>
         </Provider>
       );
     },
@@ -20,7 +23,6 @@ export const registerScreen = (screenName, Component) => {
 };
 
 export const setRoot = (type, id, children) => {
-  console.log('TCL ~ children', children);
   return Navigation.setRoot({
     root: {
       [type]: {

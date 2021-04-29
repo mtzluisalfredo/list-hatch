@@ -1,12 +1,18 @@
+// - Tarea (Texto)
+// - Estatus (Activo, Completado, Cancelado)
+// - Fecha y hora de Creación (Fecha Hora)
+// - Última Fecha y hora de modificación (Fecha Hora)
+// - Ubicacion (Objeto { lat: , lng: })
+
+
 const initialState = {
   itemsList: [
     {
-      title: 'Luis',
-      create: '12-12-12',
-    },
-    {
-      title: 'Alfredo',
-      create: '12-12-12',
+      task: 'Luis',
+      status: '12-12-12',
+      createAt: '-',
+      updatedAt: '--',
+      location: '--',
     },
   ],
 };

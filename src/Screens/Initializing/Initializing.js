@@ -14,9 +14,7 @@ const styles = StyleSheet.create({
 });
 
 const Initializing = () => {
-  console.log('TCL ~ Initializing');
   const initApp = () => {
-    console.log('TCL ~ initApp');
     goHome();
   };
 

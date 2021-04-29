@@ -1,44 +1,53 @@
 import React from 'react';
 import {
   useNavigationButtonPress,
-  showModal,
+  useNavigation,
 } from 'react-native-navigation-hooks';
 import {connect} from 'react-redux';
 import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   bgc: {
+    flex: 1,
     backgroundColor: '#ececec',
-    padding: 16,
   },
 });
 
 const SafeArea = (props) => {
-  useNavigationButtonPress((e) => {
-    console.log('TCL ~ e', e);
-    showModal('Detail', {}, {});
+  const {push} = useNavigation();
+  useNavigationButtonPress(({buttonId}) => {
+    let viewModal = '';
+    // se pretende que aqui se defina el modal a mostrar
+    if (buttonId === 'add') {
+      viewModal = 'Detail';
+    }
+    push(viewModal, {myProp: 'value'});
   });
   const {children} = props;
   return <SafeAreaView style={styles.bgc}>{children}</SafeAreaView>;
 };
 
 const ScreenView = (props) => {
-  const {renderView = () => null, scrollView = false, state} = props;
+  const {
+    renderView = () => null,
+    scrollView = false,
+    state,
+    componentId,
+  } = props;
   const renderChildren = renderView({...state});
 
   if (scrollView) {
     return (
-      <SafeArea>
+      <SafeArea componentId={componentId}>
         <ScrollView>{renderChildren}</ScrollView>
       </SafeArea>
     );
   }
 
-  return <SafeArea>{renderChildren}</SafeArea>;
+  return <SafeArea componentId={componentId}>{renderChildren}</SafeArea>;
 };
 
 const mapStateToProps = (state) => {
-  console.log('TCL ~ state', state);
   return {state: state};
 };
 

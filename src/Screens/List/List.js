@@ -1,14 +1,15 @@
 import React from 'react';
 import {ScreenView, Item} from '../../components';
 
-const Detail = () => {
+const Detail = ({componentId}) => {
   return (
     <ScreenView
       scrollView
+      componentId={componentId}
       renderView={({list = {}}) => {
         const {itemsList = []} = list;
-        return itemsList.map(({title}) => {
-          return <Item title={title} />;
+        return itemsList.map(({task}) => {
+          return <Item title={task} />;
         });
       }}
     />
