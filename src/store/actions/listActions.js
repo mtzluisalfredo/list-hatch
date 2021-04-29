@@ -10,7 +10,7 @@ export const types = createTypes(
   'SET_FILTER',
 );
 
-export const addItem = (task) => (dispatch, getState) => {
+export const addItem = (task, coords) => (dispatch, getState) => {
   const {list = {}} = getState();
   const {itemsList = []} = list;
   const item = {
@@ -20,6 +20,7 @@ export const addItem = (task) => (dispatch, getState) => {
     updatedAt: '',
     location: '',
     id: moment().valueOf(),
+    coords: coords,
   };
 
   return dispatch({
