@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+  useNavigationButtonPress,
+  showModal,
+} from 'react-native-navigation-hooks';
 import {connect} from 'react-redux';
 import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
 
@@ -10,6 +14,10 @@ const styles = StyleSheet.create({
 });
 
 const SafeArea = (props) => {
+  useNavigationButtonPress((e) => {
+    console.log('TCL ~ e', e);
+    showModal('Detail', {}, {});
+  });
   const {children} = props;
   return <SafeAreaView style={styles.bgc}>{children}</SafeAreaView>;
 };

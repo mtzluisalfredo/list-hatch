@@ -1,6 +1,6 @@
 import React from 'react';
-import {Navigation} from 'react-native-navigation';
-import {Provider} from 'react-redux';
+import { Navigation } from 'react-native-navigation';
+import { Provider } from 'react-redux';
 import configureStore from '../store/configureStore';
 
 const store = configureStore();
@@ -32,7 +32,7 @@ export const setRoot = (type, id, children) => {
 };
 
 export const goHome = () =>
-  setRoot('stack', 'List', [
+  setRoot('stack', 'Home', [
     {
       component: {
         name: 'List',
@@ -41,6 +41,12 @@ export const goHome = () =>
             title: {
               text: 'List',
             },
+            rightButtons: [
+              {
+                id: 'add',
+                text: 'Agregar',
+              },
+            ],
           },
         },
       },
