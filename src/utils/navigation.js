@@ -1,11 +1,19 @@
 import React from 'react';
 import {Navigation} from 'react-native-navigation';
+import {Provider} from 'react-redux';
+import configureStore from '../store/configureStore';
+
+const store = configureStore();
 
 export const registerScreen = (screenName, Component) => {
   Navigation.registerComponent(
     screenName,
     () => (props) => {
-      return <Component {...props} />;
+      return (
+        <Provider store={store}>
+          <Component {...props} />
+        </Provider>
+      );
     },
     () => Component,
   );

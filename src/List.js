@@ -5,7 +5,7 @@ const List = () => {
   console.log('TCL ~ List');
   return (
     <SafeAreaView>
-      <Text>List</Text>
+      <Text>List -Redux</Text>
     </SafeAreaView>
   );
 };
