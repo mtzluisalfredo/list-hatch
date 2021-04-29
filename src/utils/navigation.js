@@ -41,7 +41,7 @@ export const goHome = () =>
         options: {
           topBar: {
             title: {
-              text: 'List',
+              text: '',
             },
             noBorder: true,
             visible: true,

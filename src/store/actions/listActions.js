@@ -1,7 +1,13 @@
 import {createTypes} from '../../utils/types';
 import moment from 'moment';
 
-export const types = createTypes('app', 'ADD_ITEM', 'SET_TASK', 'UPDATE_TASK');
+export const types = createTypes(
+  'app',
+  'ADD_ITEM',
+  'SET_TASK',
+  'SET_IS_UPDATE_TASK',
+  'UPDATE_TASK',
+);
 
 // - Tarea (Texto)
 // - Estatus (Activo, Completado, Cancelado)
@@ -23,6 +29,7 @@ export const addItem = (task) => (dispatch, getState) => {
     createAt: moment().format(),
     updatedAt: '',
     location: '',
+    id: moment().valueOf(),
   };
 
   return dispatch({
@@ -38,12 +45,23 @@ export const setTask = (task) => (dispatch, getState) => {
   });
 };
 
-export const updateTask = () => (dispatch, getState) => {
+export const setIsUpdate = (isUpdate) => (dispatch, getState) => {
+  return dispatch({
+    type: types.SET_IS_UPDATE_TASK,
+    payload: {isUpdate},
+  });
+};
+
+export const updateTask = (task) => (dispatch, getState) => {
+  console.log('TCL ~ task', task);
+  const taskTemp = {...task, updatedAt: moment().format()};
   const {list = {}} = getState();
-  console.log('TCL ~ updateTaskupdateTaskupdateTask', list);
-  const {isUpdate} = list;
+  const {itemsList = []} = list;
+
+  const listTemp = itemsList.map((e) => (e.id !== task.id ? e : taskTemp));
+
   return dispatch({
     type: types.UPDATE_TASK,
-    payload: {isUpdate: !isUpdate},
+    payload: {itemsList: listTemp},
   });
 };

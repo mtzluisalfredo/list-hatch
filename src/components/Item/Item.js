@@ -3,52 +3,70 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {dateLocale} from '../../utils/dates';
+import {hexToRgbA, labelStatus} from '../../utils';
 
-const Item = ({item, onPress = () => {}}) => {
-  const {task = '', createAt = ''} = item;
+const Item = (props) => {
+  const {item, onPress = () => {}} = props;
+  const {task = '', createAt = '', status = '', updatedAt = ''} = item;
+
   return (
     <TouchableOpacity
-      style={styles().container}
+      style={styles(props).container}
       onPress={() => {
         onPress();
       }}>
-      <View style={styles().wrapperStatus}>
+      <View style={styles(props).wrapperStatus}>
         <View>
-          <Text style={styles().status}>Activa</Text>
+          <Text style={styles(props).status}>{labelStatus(status)}</Text>
         </View>
       </View>
-      <View style={styles().wrapperTitle}>
-        <View style={styles().badge} />
+      <View style={styles(props).wrapperTitle}>
+        <View style={styles(props).badge} />
         <View style={{height: 50}}>
           <Text ellipsizeMode="tail" numberOfLines={2}>
             {task}
           </Text>
         </View>
       </View>
-      <View style={styles().wrapperTask}>
+      <View style={styles(props).wrapperTask}>
         <View>
-          <Text style={styles().dates}>{`Creada: ${dateLocale(
+          <Text style={styles(props).dates}>{`Creada: ${dateLocale(
             createAt,
           )}`}</Text>
         </View>
         <View>
-          <Text style={styles().dates}>{`Actualizada: ${dateLocale(
-            createAt,
-          )}`}</Text>
+          <Text style={styles(props).dates}>
+            {!updatedAt ? '' : `Actualizada: ${dateLocale(updatedAt)}`}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
   );
 };
 
-const styles = () => {
+const styles = ({isDetail, item = {}}) => {
+  const {status} = item;
+  let colorBtn = '#f9be7c';
+  switch (status) {
+    case 'active':
+      colorBtn = '#6488e4';
+      break;
+    case 'completed':
+      colorBtn = '#309397';
+      break;
+    case 'cancel':
+      colorBtn = '#e46472';
+      break;
+    default:
+      colorBtn = '#f9be7c';
+  }
   return StyleSheet.create({
     container: {
-      borderLeftWidth: 4,
-      borderLeftColor: '#5b62ce',
+      borderLeftWidth: isDetail ? 0 : 4,
+      borderLeftColor: colorBtn,
       marginHorizontal: 8,
       marginVertical: 4,
-      backgroundColor: '#eff0fb',
+      backgroundColor: hexToRgbA(colorBtn, '0.2'),
       borderRadius: 10,
       paddingHorizontal: 30,
       paddingVertical: 40,
@@ -71,7 +89,7 @@ const styles = () => {
       alignItems: 'flex-end',
     },
     status: {
-      color: '#5b62ce',
+      color: colorBtn,
       fontWeight: 'bold',
     },
     dates: {
@@ -84,7 +102,7 @@ const styles = () => {
       height: 10,
       borderRadius: 5,
       marginRight: 4,
-      backgroundColor: '#5b62ce',
+      backgroundColor: colorBtn,
     },
   });
 };

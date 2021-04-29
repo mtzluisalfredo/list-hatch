@@ -15,16 +15,15 @@ const styles = StyleSheet.create({
 });
 
 const SafeArea = (props) => {
-  const {updateTask} = props;
+  const {setIsUpdate} = props;
   const {push} = useNavigation();
   useNavigationButtonPress(({buttonId}) => {
     // se pretende que aqui se defina el modal a mostrar
-    console.log('TCL ~ buttonId', buttonId);
     if (buttonId === 'add') {
       push('AddTask');
     }
     if (buttonId === 'edit') {
-      updateTask(true);
+      setIsUpdate(true);
     }
   });
   const {children} = props;

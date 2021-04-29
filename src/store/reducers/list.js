@@ -5,7 +5,7 @@ const initialState = {
   taskActive: {},
   isUpdate: false,
 };
-const {ADD_ITEM, SET_TASK, UPDATE_TASK} = types;
+const {ADD_ITEM, SET_TASK, SET_IS_UPDATE_TASK, UPDATE_TASK} = types;
 
 const reducer = (state = initialState, action) => {
   const {payload} = action;
@@ -22,10 +22,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         taskActive: payload.taskActive,
       };
-    case UPDATE_TASK:
+    case SET_IS_UPDATE_TASK:
       return {
         ...state,
         isUpdate: payload.isUpdate,
+      };
+    case UPDATE_TASK:
+      return {
+        ...state,
+        itemsList: payload.itemsList,
       };
     default:
       return state;

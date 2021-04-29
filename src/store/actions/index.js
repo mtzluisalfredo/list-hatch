@@ -1,1 +1,1 @@
-export {addItem, setTask, updateTask} from './listActions';
+export {addItem, setTask, setIsUpdate, updateTask} from './listActions';
