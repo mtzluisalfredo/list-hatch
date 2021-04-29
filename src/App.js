@@ -1,5 +1,5 @@
 import {Navigation} from 'react-native-navigation';
-import {registerScreens} from './screens';
+import {registerScreens} from './utils/screens';
 import {setRoot} from './utils/navigation';
 
 registerScreens();

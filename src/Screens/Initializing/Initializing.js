@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {SafeAreaView, Text, StyleSheet} from 'react-native';
-import {goHome} from './utils/navigation';
+import {goHome} from '../../utils/navigation';
 
 const styles = StyleSheet.create({
   welcome: {
