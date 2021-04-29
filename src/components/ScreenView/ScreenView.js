@@ -5,6 +5,7 @@ import {
 } from 'react-native-navigation-hooks';
 import {connect} from 'react-redux';
 import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
+import * as listActions from '../../store/actions';
 
 const styles = StyleSheet.create({
   bgc: {
@@ -33,8 +34,9 @@ const ScreenView = (props) => {
     scrollView = false,
     state,
     componentId,
+    addItem,
   } = props;
-  const renderChildren = renderView({...state});
+  const renderChildren = renderView({...state, addItem});
 
   if (scrollView) {
     return (
@@ -51,6 +53,6 @@ const mapStateToProps = (state) => {
   return {state: state};
 };
 
-const actions = {};
+const actions = {...listActions};
 
 export default connect(mapStateToProps, actions)(ScreenView);

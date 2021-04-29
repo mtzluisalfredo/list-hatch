@@ -7,7 +7,7 @@ const Detail = () => {
   return (
     <ScreenView
       scrollView
-      renderView={() => {
+      renderView={({addItem}) => {
         return (
           <>
             <Input
@@ -20,6 +20,7 @@ const Detail = () => {
             <Buttom
               label="Guardar"
               onPress={() => {
+                addItem('d')
                 console.log('TCL ~ Buttom', task);
               }}
             />

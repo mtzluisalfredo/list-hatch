@@ -1,10 +1,3 @@
-// - Tarea (Texto)
-// - Estatus (Activo, Completado, Cancelado)
-// - Fecha y hora de Creación (Fecha Hora)
-// - Última Fecha y hora de modificación (Fecha Hora)
-// - Ubicacion (Objeto { lat: , lng: })
-
-
 const initialState = {
   itemsList: [
     {
