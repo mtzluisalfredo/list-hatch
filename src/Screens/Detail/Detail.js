@@ -1,27 +1,56 @@
-import React, {useState} from 'react';
-import {ScreenView, Input, Buttom} from '../../components';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect} from 'react';
+import {ScreenView, Input, Buttom, ToggleComponent} from '../../components';
 
-const Detail = () => {
-  const [task, setTask] = useState('i');
-
+const Detail = (props) => {
+console.log('TCL ~ DetailDetail', props);
+  const {updateTask} = props;
+  useEffect(
+    () => () => {
+      console.log('unmount');
+      updateTask(false);
+    },
+    [],
+  );
   return (
     <ScreenView
       scrollView
-      renderView={({addItem}) => {
+      renderView={(propsView) => {
+        const {list = {}} = propsView;
+        const {taskActive = {}, isUpdate = false} = list;
+        console.log('TCL ~ isUpdate', isUpdate);
+        console.log('TCL ~ propsView', propsView);
         return (
           <>
-            <Input
-              title="Tarea"
-              value={task}
-              multiline
-              onChangeText={(e) => setTask(e)}
-              placeholder="Escriba la descripción de la tarea..."
+            <ToggleComponent
+              condition={isUpdate}
+              principal={() => {
+                return <Buttom />;
+              }}
+              secondary={() => {
+                return (
+                  <Input
+                    title="Tarea"
+                    value={taskActive.task}
+                    multiline
+                    onChangeText={(e) => console.log(e)}
+                    placeholder="Escriba la descripción de la tarea..."
+                  />
+                );
+              }}
             />
             <Buttom
-              label="Guardar"
+              type={'done'}
+              label="Completar"
               onPress={() => {
-                addItem('d')
-                console.log('TCL ~ Buttom', task);
+                console.log('Luis');
+              }}
+            />
+            <Buttom
+              type={'cancel'}
+              label="Cancelar"
+              onPress={() => {
+                console.log('Luis');
               }}
             />
           </>

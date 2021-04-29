@@ -1,17 +1,32 @@
+import {types} from '../actions/listActions';
+
 const initialState = {
-  itemsList: [
-    {
-      task: 'Luis',
-      status: '12-12-12',
-      createAt: '-',
-      updatedAt: '--',
-      location: '--',
-    },
-  ],
+  itemsList: [],
+  taskActive: {},
+  isUpdate: false,
 };
+const {ADD_ITEM, SET_TASK, UPDATE_TASK} = types;
 
 const reducer = (state = initialState, action) => {
+  const {payload} = action;
+
   switch (action.type) {
+    case ADD_ITEM:
+      return {
+        ...state,
+        itemsList: payload.itemsList,
+        // ...itemsList, tambien puede ser de esta forma
+      };
+    case SET_TASK:
+      return {
+        ...state,
+        taskActive: payload.taskActive,
+      };
+    case UPDATE_TASK:
+      return {
+        ...state,
+        isUpdate: payload.isUpdate,
+      };
     default:
       return state;
   }

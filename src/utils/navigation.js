@@ -43,6 +43,12 @@ export const goHome = () =>
             title: {
               text: 'List',
             },
+            noBorder: true,
+            visible: true,
+            transparent: true,
+            translucent: true,
+            background: {color: 'white'},
+            elevation: 0,
             rightButtons: [
               {
                 id: 'add',

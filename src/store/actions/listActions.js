@@ -1,6 +1,7 @@
 import {createTypes} from '../../utils/types';
+import moment from 'moment';
 
-export const types = createTypes('app', 'ADD_ITEM');
+export const types = createTypes('app', 'ADD_ITEM', 'SET_TASK', 'UPDATE_TASK');
 
 // - Tarea (Texto)
 // - Estatus (Activo, Completado, Cancelado)
@@ -12,15 +13,37 @@ export const types = createTypes('app', 'ADD_ITEM');
 // createAt: '-',
 // updatedAt: '--',
 // location: '--',
-export const addItem = (task) => {
-  console.log('TCL ~ task', task);
+
+export const addItem = (task) => (dispatch, getState) => {
+  const {list = {}} = getState();
+  const {itemsList = []} = list;
   const item = {
     task,
     status: 'active',
-    createAt: new Date(),
+    createAt: moment().format(),
+    updatedAt: '',
+    location: '',
   };
-  return {
+
+  return dispatch({
     type: types.ADD_ITEM,
-    item,
-  };
+    payload: {itemsList: itemsList.concat(item)},
+  });
+};
+
+export const setTask = (task) => (dispatch, getState) => {
+  return dispatch({
+    type: types.SET_TASK,
+    payload: {taskActive: task},
+  });
+};
+
+export const updateTask = () => (dispatch, getState) => {
+  const {list = {}} = getState();
+  console.log('TCL ~ updateTaskupdateTaskupdateTask', list);
+  const {isUpdate} = list;
+  return dispatch({
+    type: types.UPDATE_TASK,
+    payload: {isUpdate: !isUpdate},
+  });
 };
