@@ -10,7 +10,6 @@ import {
 } from '../../components';
 
 const Detail = (props) => {
-  console.log('TCL ~ DetailDetail', props);
   const [editTask, serEditTask] = useState('');
   const {setIsUpdate} = props;
   useEffect(
@@ -25,9 +24,8 @@ const Detail = (props) => {
       renderView={(propsView) => {
         const {list = {}, updateTask = () => {}, pop = () => {}} = propsView;
         const {taskActive = {}, isUpdate = false} = list;
-        console.log('TCL ~ isUpdate', isUpdate);
-        console.log('TCL ~ propsView', propsView);
         const newText = editTask || taskActive.task;
+
         return (
           <>
             <View style={{height: 200}}>
@@ -49,12 +47,25 @@ const Detail = (props) => {
                 }}
               />
             </View>
+            {isUpdate ? (
+              <Buttom
+                type={'update'}
+                disabled={false}
+                label="Actualizar"
+                onPress={() => {
+                  updateTask({
+                    ...taskActive,
+                    task: newText,
+                  });
+                  pop();
+                }}
+              />
+            ) : null}
             <Buttom
               type={'done'}
               disabled={false}
               label="Completar"
               onPress={() => {
-                console.log('TCL ~ onPress');
                 updateTask({
                   ...taskActive,
                   status: 'completed',
@@ -68,7 +79,6 @@ const Detail = (props) => {
               disabled={false}
               label="Cancelar"
               onPress={() => {
-                console.log('TCL ~ onPress');
                 updateTask({
                   ...taskActive,
                   status: 'cancel',

@@ -53,7 +53,6 @@ export const setIsUpdate = (isUpdate) => (dispatch, getState) => {
 };
 
 export const updateTask = (task) => (dispatch, getState) => {
-  console.log('TCL ~ task', task);
   const taskTemp = {...task, updatedAt: moment().format()};
   const {list = {}} = getState();
   const {itemsList = []} = list;

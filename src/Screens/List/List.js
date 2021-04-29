@@ -25,10 +25,7 @@ const Detail = ({componentId}) => {
         const {state = {}} = propsHeader;
         const {list = {}} = state;
         const {itemsList = []} = list;
-        console.log('TCL ~ state', state);
-        console.log('TCL ~ propsHeader', propsHeader);
-        // active
-        // completed
+
         if (!orderListTask(itemsList).length) {
           return (
             <View style={styles.wrapper}>
