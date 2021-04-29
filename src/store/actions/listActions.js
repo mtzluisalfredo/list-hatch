@@ -7,18 +7,8 @@ export const types = createTypes(
   'SET_TASK',
   'SET_IS_UPDATE_TASK',
   'UPDATE_TASK',
+  'SET_FILTER',
 );
-
-// - Tarea (Texto)
-// - Estatus (Activo, Completado, Cancelado)
-// - Fecha y hora de Creación (Fecha Hora)
-// - Última Fecha y hora de modificación (Fecha Hora)
-// - Ubicacion (Objeto { lat: , lng: })
-// task: 'Luis',
-// status: '12-12-12',
-// createAt: '-',
-// updatedAt: '--',
-// location: '--',
 
 export const addItem = (task) => (dispatch, getState) => {
   const {list = {}} = getState();
@@ -62,5 +52,13 @@ export const updateTask = (task) => (dispatch, getState) => {
   return dispatch({
     type: types.UPDATE_TASK,
     payload: {itemsList: listTemp},
+  });
+};
+
+
+export const setFilter = (filter) => (dispatch, getState) => {
+  return dispatch({
+    type: types.SET_FILTER,
+    payload: {filter},
   });
 };

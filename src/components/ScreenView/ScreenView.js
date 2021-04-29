@@ -18,6 +18,7 @@ const ScreenView = (props) => {
     updateTask,
     titleView = '',
     renderHeader = null,
+    setFilter,
   } = props;
   const renderChildren = renderView({
     ...state,
@@ -27,6 +28,7 @@ const ScreenView = (props) => {
     setIsUpdate,
     updateTask,
     pop,
+    setFilter,
   });
 
   if (scrollView) {

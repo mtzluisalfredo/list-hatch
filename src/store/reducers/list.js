@@ -4,8 +4,9 @@ const initialState = {
   itemsList: [],
   taskActive: {},
   isUpdate: false,
+  filter: '',
 };
-const {ADD_ITEM, SET_TASK, SET_IS_UPDATE_TASK, UPDATE_TASK} = types;
+const {ADD_ITEM, SET_TASK, SET_IS_UPDATE_TASK, UPDATE_TASK, SET_FILTER} = types;
 
 const reducer = (state = initialState, action) => {
   const {payload} = action;
@@ -31,6 +32,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         itemsList: payload.itemsList,
+      };
+    case SET_FILTER:
+      return {
+        ...state,
+        filter: payload.filter,
       };
     default:
       return state;

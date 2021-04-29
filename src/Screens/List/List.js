@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 16,
+    padding: 8,
     borderRadius: 6,
   },
   wrapper: {marginHorizontal: 8, height: 40, marginBottom: 12},
@@ -22,11 +22,11 @@ const Detail = ({componentId}) => {
       scrollView
       titleView="Lista de tareas"
       renderHeader={(propsHeader) => {
-        const {state = {}} = propsHeader;
+        const {state = {}, setFilter = () => {}} = propsHeader;
         const {list = {}} = state;
-        const {itemsList = []} = list;
+        const {itemsList = [], filter = ''} = list;
 
-        if (!orderListTask(itemsList).length) {
+        if (!orderListTask(itemsList, filter).length) {
           return (
             <View style={styles.wrapper}>
               <Text>Lista vacia</Text>
@@ -38,6 +38,10 @@ const Detail = ({componentId}) => {
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               {[
                 {
+                  label: 'Todas',
+                  status: '',
+                },
+                {
                   label: 'Completadas',
                   status: 'completed',
                 },
@@ -45,9 +49,13 @@ const Detail = ({componentId}) => {
                   label: 'Activas',
                   status: 'active',
                 },
-              ].map(({label}) => {
+              ].map(({label, status}) => {
                 return (
-                  <TouchableOpacity style={styles.btnfilter}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setFilter(status);
+                    }}
+                    style={styles.btnfilter}>
                     <Text>{label}</Text>
                   </TouchableOpacity>
                 );
@@ -64,10 +72,10 @@ const Detail = ({componentId}) => {
           setTask = () => {},
           setIsUpdate = () => {},
         } = props;
-        const {itemsList = []} = list;
+        const {itemsList = [], filter = ''} = list;
         return (
           <>
-            {orderListTask(itemsList).map((task) => {
+            {orderListTask(itemsList, filter).map((task) => {
               return (
                 <>
                   <Item

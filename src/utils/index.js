@@ -39,13 +39,19 @@ export function labelStatus(status) {
   return label;
 }
 
-export function orderListTask(list = []) {
+export function orderListTask(list = [], filter = '') {
   if (!Array.isArray(list)) {
     return [];
   }
-  return list
+  let listTemp = list
     .sort((a, b) => {
       return moment(a.createdAt).diff(b.createdAt);
     })
     .filter((e) => e.status !== 'cancel');
+
+  if (filter) {
+    listTemp = listTemp.filter((e) => e.status === filter);
+  }
+
+  return listTemp;
 }
