@@ -1,13 +1,18 @@
 import React from 'react';
-import {Text, SafeAreaView} from 'react-native';
+import {ScreenView, Item} from '../../components';
 
-const List = () => {
-  console.log('TCL ~ List');
+const Detail = () => {
   return (
-    <SafeAreaView>
-      <Text>List -Redux</Text>
-    </SafeAreaView>
+    <ScreenView
+      scrollView
+      renderView={({list = {}}) => {
+        const {itemsList = []} = list;
+        return itemsList.map(({title}) => {
+          return <Item title={title} />;
+        });
+      }}
+    />
   );
 };
 
-export default List;
+export default Detail;
