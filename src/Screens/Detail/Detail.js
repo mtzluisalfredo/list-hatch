@@ -23,7 +23,7 @@ const Detail = (props) => {
     <ScreenView
       scrollView
       renderView={(propsView) => {
-        const {list = {}, updateTask = () => {}} = propsView;
+        const {list = {}, updateTask = () => {}, pop = () => {}} = propsView;
         const {taskActive = {}, isUpdate = false} = list;
         console.log('TCL ~ isUpdate', isUpdate);
         console.log('TCL ~ propsView', propsView);
@@ -60,6 +60,7 @@ const Detail = (props) => {
                   status: 'completed',
                   task: newText,
                 });
+                pop();
               }}
             />
             <Buttom
@@ -73,6 +74,7 @@ const Detail = (props) => {
                   status: 'cancel',
                   task: newText,
                 });
+                pop();
               }}
             />
           </>

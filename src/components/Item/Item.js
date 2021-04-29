@@ -69,7 +69,7 @@ const styles = ({isDetail, item = {}}) => {
       backgroundColor: hexToRgbA(colorBtn, '0.2'),
       borderRadius: 10,
       paddingHorizontal: 30,
-      paddingVertical: 40,
+      paddingVertical: 20,
     },
     wrapperTitle: {
       flexDirection: 'row',
@@ -77,13 +77,13 @@ const styles = ({isDetail, item = {}}) => {
     },
     wrapperTask: {
       paddingLeft: 14,
-      bottom: -18,
+      bottom: -10,
       flexDirection: 'column',
       justifyContent: 'flex-end',
       alignItems: 'flex-end',
     },
     wrapperStatus: {
-      top: -18,
+      top: -10,
       flexDirection: 'column',
       justifyContent: 'flex-end',
       alignItems: 'flex-end',

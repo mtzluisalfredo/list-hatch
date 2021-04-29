@@ -6,7 +6,7 @@ import * as listActions from '../../store/actions';
 import SafeArea from './SafeArea';
 
 const ScreenView = (props) => {
-  const {push} = useNavigation();
+  const {push, pop} = useNavigation();
   const {
     renderView = () => null,
     scrollView = false,
@@ -26,6 +26,7 @@ const ScreenView = (props) => {
     setTask,
     setIsUpdate,
     updateTask,
+    pop,
   });
 
   if (scrollView) {

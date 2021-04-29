@@ -7,7 +7,7 @@ const Detail = () => {
   return (
     <ScreenView
       scrollView
-      renderView={({addItem}) => {
+      renderView={({addItem, pop = () => {}}) => {
         return (
           <>
             <Input
@@ -22,6 +22,7 @@ const Detail = () => {
               label="Guardar"
               onPress={() => {
                 addItem(newTask);
+                pop();
               }}
             />
           </>
